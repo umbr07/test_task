@@ -1,0 +1,17 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model appeal {
+  id           Int       @id @default(autoincrement())
+  topic        String    @db.VarChar(255)
+  text         String    @db.VarChar(255)
+  result       String?   @db.VarChar(255)
+  status       String    @default("Новое") @db.VarChar(255)
+  created_date DateTime? @default(dbgenerated("(curdate())")) @db.Date
+}
